@@ -1,0 +1,10 @@
+[alias]
+	co = checkout
+	st = status -sb
+	ci = commit -m
+	unstage = reset HEAD --
+	diffs = diff --cached
+	unpushed = log --pretty=oneline --abbrev-commit @{u}..
+[user]
+	name = Michael Yoffe
+	email = michael@clearx.io
