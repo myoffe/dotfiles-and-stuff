@@ -108,8 +108,8 @@ alias clr='dev && cd ClearBlockchain/clear'
 alias cleardata='cd ~/Dev/ClearBlockchain/data/work && rm -rf node1/data && rm -rf node2/data && cd -'
 
 function pretty_csv {
-    SEP=${1:-foo}
-    FILE=$2
+    FILE=$1
+    SEP=${2:-,}
     perl -pe 's/((?<='"$SEP"')|(?<=^))'"$SEP"'/ '"$SEP"'/g;' "$FILE" | column -t -s"$SEP" | less  -F -S -X -K
 }
 
