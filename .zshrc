@@ -1,13 +1,24 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:/Users/michael/Library/Python/2.7
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+RPROMPT='%{$fg[blue]%}%T%{$reset_color%}'
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/michael/.oh-my-zsh
+export ZSH="/Users/michael/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
+
+DEFAULT_USER=michael
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -41,7 +52,10 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -51,7 +65,10 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -61,8 +78,6 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -86,19 +101,21 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# nvm
+alias dc='docker-compose'
+alias dev='cd ~/Dev'
+alias code='dev'
+alias clr='dev && cd ClearBlockchain/clear'
+alias cleardata='cd ~/Dev/ClearBlockchain/data/work && rm -rf node1/data && rm -rf node2/data && cd -'
+
+function pretty_csv {
+    SEP=${1:-foo}
+    FILE=$2
+    perl -pe 's/((?<='"$SEP"')|(?<=^))'"$SEP"'/ '"$SEP"'/g;' "$FILE" | column -t -s"$SEP" | less  -F -S -X -K
+}
+
+# This should be at the end
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
-
-# jenv
-eval "$(jenv init -)"
-export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
-alias jenv_set_java_home='export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"'
-
-alias updock='docker build -t myoffe/twitter-lite . && docker push myoffe/twitter-lite && docker stack deploy -c docker-compose.yml twitter'
-alias dc='docker-compose'
-alias up='dc up -d --build && dc ps'
-alias edit="open -a MacVim.app $1"
-alias code='cd ~/code'
-alias frank='code && cd frank'
 
