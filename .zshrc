@@ -101,17 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias dc='docker-compose'
-alias dev='cd ~/Dev'
-alias code='dev'
-alias clr='dev && cd ClearBlockchain/clear'
-alias cleardata='cd ~/Dev/ClearBlockchain/data/work && rm -rf node1/data && rm -rf node2/data && cd -'
-
-function pcsv {
-    FILE=$1
-    SEP=${2:-,}
-    perl -pe 's/((?<='"$SEP"')|(?<=^))'"$SEP"'/ '"$SEP"'/g;' "$FILE" | column -t -s"$SEP" | less  -F -S -X -K
-}
+source ~/.aliases
 
 # This should be at the end
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -119,3 +109,5 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
