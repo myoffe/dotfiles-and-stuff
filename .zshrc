@@ -1,7 +1,7 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+LC_TIME=en_US.UTF-8
 
-RPROMPT='%{$fg[blue]%}%T%{$reset_color%}'
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$HOME/dev/ClearBlockchain/scripts:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/michael/.oh-my-zsh"
@@ -108,6 +108,5 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
