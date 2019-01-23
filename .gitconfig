@@ -5,6 +5,31 @@
 	unstage = reset HEAD --
 	diffs = diff --cached
 	unpushed = log --pretty=oneline --abbrev-commit @{u}..
+	b = branch
+	bb = rev-parse --abbrev-ref HEAD
+	amend = commit --amend
+        branch-name = "!git rev-parse --abbrev-ref HEAD"
+        todo = "!git diff master..$(git branch-name)| ag TODO"
+	# Push the current branch to the remote "origin", and set it to track
+	# the upstream branch
+	publish = "!git push -u origin $(git branch-name)"
+	# Delete the remote version of the current branch
+	unpublish = "!git push origin :$(git branch-name)"
+	dangling = "!git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'"
+	delete-dangling = "!git dangling | xargs git branch -d"
 [user]
 	name = Michael Yoffe
-	email = michael@clearx.io
+	email = myoffe@users.noreply.github.com
+[pull]
+	rebase = true
+[pager]
+       diff = diff-so-fancy | less --tabs=1,5 -RFX
+       show = diff-so-fancy | less --tabs=1,5 -RFX
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[rerere]
+	enabled = true
